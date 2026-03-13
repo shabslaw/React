@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Chatbot</title>
+  </head>
+
+  <body>
+    <!-- HTML Element -->
+    <div class="js-container"></div>
+
+    <!-- Load External Library -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+    
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+      function InputMessage(){
+        const [message, setMessage] = React.useState('');
+
+        function inputMessage(event){
+          setMessage(event.target.value);
+        }
+
+        function resetInput(){
+          setMessage('');
+        }
+
+        function sendInput(){
+          setMessage('Alice');
+        }
+
+        return(
+            <>
+                <input 
+                  onChange={inputMessage} 
+                  placeholder="Type your name here"
+                  value={message}
+                />
+                <button onClick={resetInput} >Reset</button>
+                <button onClick={sendInput} >Example</button>
+                <p>Hello {message}</p>
+            </>
+        )
+      }
+      
+      function App(){
+        
+
+        return(
+            <>
+                <InputMessage />
+            </>
+        )
+      } 
+    
+    //   Get HTML Element, SetUp React, Use Render
+      const container = document.querySelector('.js-container');
+      const root = ReactDOM.createRoot(container);
+      // root.render(app);
+      root.render(<App />);
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Chatbot classwork</title>
+  </head>
+
+  <body>
+    <!-- HTML Element -->
+    <div class="js-container"></div>
+
+    <!-- Load External Library -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+      function LoginFrom(){
+        return(
+          <>
+            <input 
+              placeholder="Email" 
+              style={{display: 'block'}}
+            />
+            <input 
+              placeholder="Password" 
+              type="password"
+              style={{display: 'block'}} 
+            />
+
+            <button>Login</button>
+            <button>Sign up</button>
+          </>
+        );
+      }
+
+      
+
+      function App(){
+        return(
+          <>
+            <p>Hello, welcome to my website!</p>
+            <LoginFrom />
+          </>
+        )
+      }
+        
+    
+    //   Get HTML Element, SetUp React, Use Render
+      const container = document.querySelector('.js-container');
+      const root = ReactDOM.createRoot(container);
+      root.render(<App />);
+
+    </script>
+  </body>
+</html>

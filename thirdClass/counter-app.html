@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Clock</title>
+    <style>
+      .button-container{
+        margin: 0px;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        background-color: rgb(222, 222, 222);
+      }
+
+      button{
+        background-color: rgb(25, 135, 84);
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 10px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="js-container"></div>
+
+    <!-- Load external Javascript -->
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+    <!-- Load External Library -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+      function App(){
+        const [counter, setCounter] = React.useState(0)
+        const clickedButtonRef = React.useRef(null)
+
+        function clickedButton(){
+          setCounter(counter + 1);
+        }
+
+        function resetButton(){
+          setCounter(0)
+        }
+
+        function autoButton(){
+          setInterval(() => {
+            const buttonElem = clickedButtonRef.current;
+            buttonElem.click();
+          }, 1000);
+        }
+
+        return(
+          <div className="button-container" >
+            <button 
+              onClick={clickedButton} 
+              ref={clickedButtonRef}
+            >Clicked {counter} {counter === 1 ? "time" : "times"}</button>
+            <button onClick={resetButton} >Reset</button>
+            <button onClick={autoButton} >Auto Click</button>
+          </div>
+        )
+      }
+      
+      const container = document.querySelector('.js-container');
+      const root = ReactDOM.createRoot(container)
+      root.render(<App />);
+
+      // setInterval(() => {
+      //   const paragraph = <p>Current Time :{dayjs().format('HH:mm:ss')} </p>;
+      //   root.render(paragraph);
+      // }, 1000)
+
+    </script>
+  </body>
+</html>

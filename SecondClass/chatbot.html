@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Chatbot</title>
+  </head>
+
+  <body>
+    <!-- HTML Element -->
+    <div class="js-container"></div>
+
+    <!-- Load External Library -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+      function ChatbotInput(){
+        return(
+          <>
+            <input 
+              placeholder="Send a message to Chatbot" 
+              size="30" 
+            />
+            <button>Send</button>
+          </>
+        );
+      }
+
+      function ChatMessage({message, sender}){
+        // const message = props.message;
+        // const sender = props.sender;
+        // const { message, sender } = props;
+        
+
+        /*
+        if(sender === "robot"){
+          return(
+            <div>
+              <img src="robot.png" width="50" />
+              {message}
+            </div>
+          )
+        }
+        */
+
+        return(
+          <div>
+            {sender === "robot" && (
+              <img src="robot.png" width="50" />
+            )}
+            {message}
+            {sender === "user" && (
+              <img src="user.png" width="50" />
+            )}
+          </div>
+        );
+      }
+
+      /*
+      const div = (
+          <div>
+              {ChatbotInput()}
+              <ChatbotInput></ChatbotInput>
+              <ChatbotInput />
+          </div>
+      );
+
+      const app = (
+        <>
+          <ChatbotInput />
+          <ChatMessage 
+            message="Hello Chatbot" 
+            sender="user" 
+          />
+          <ChatMessage 
+            message="How can i help you?" 
+            sender="robot" 
+          />
+          <ChatMessage 
+            message="Today is sepetember 27" 
+            sender="user" 
+          />
+          <ChatMessage 
+            message="How about flip a coin" 
+            sender="robot" 
+          />
+          <ChatMessage 
+            message="sure! you got tails" 
+            sender="user" 
+          />
+        </>
+      );
+      */
+
+      function App(){
+        return(
+          <>
+            <ChatbotInput />
+            <ChatMessage 
+              message="Hello Chatbot" 
+              sender="user" 
+            />
+            <ChatMessage 
+              message="How can i help you?" 
+              sender="robot" 
+            />
+            <ChatMessage 
+              message="Today is sepetember 27" 
+              sender="user" 
+            />
+            <ChatMessage 
+              message="How about flip a coin" 
+              sender="robot" 
+            />
+            <ChatMessage 
+              message="sure! you got tails" 
+              sender="user" 
+            />
+          </>
+        )
+      }
+        
+    
+    //   Get HTML Element, SetUp React, Use Render
+      const container = document.querySelector('.js-container');
+      const root = ReactDOM.createRoot(container);
+      // root.render(app);
+      root.render(<App />);
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Chatbot</title>
+  </head>
+
+  <body>
+    <!-- HTML Element -->
+    <div class="js-container"></div>
+
+    <!-- Load External Library -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+    
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      
+      function ResetButton({count, setCount}){
+        function resetbutton(){
+            setCount(0);
+        }
+
+        return(
+            <>
+                <button onClick={resetbutton} >Reset</button>
+            </>
+        )
+      }
+      
+      function TimeButton({count, setCount}){
+        function clicked(){
+            setCount(count + 1);
+            // console.log("Clicked");
+        }
+
+        return(
+            <>
+                <button 
+                    onClick={clicked} 
+                >Clicked {count} {count === 1 ? "time" : "times"}
+                </button>
+            </>
+        )
+      }
+      
+      function App(){
+        const [count, setCount] = React.useState(0)
+
+        return(
+            <>
+                <TimeButton 
+                    count={count} 
+                    setCount={setCount} 
+                />
+                <TimeButton 
+                    count={count} 
+                    setCount={setCount} 
+                />
+                <ResetButton 
+                    count={count} 
+                    setCount={setCount} 
+                />
+            </>
+        )
+      } 
+    
+    //   Get HTML Element, SetUp React, Use Render
+      const container = document.querySelector('.js-container');
+      const root = ReactDOM.createRoot(container);
+      // root.render(app);
+      root.render(<App />);
+
+    </script>
+  </body>
+</html>

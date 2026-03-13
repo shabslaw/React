@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>E-Commerce App</title>
+  </head>
+
+  <body>
+    <!-- HTML Element -->
+    <div class="js-container"></div>
+
+    <!-- Load External Library -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+      function ProductDetails({imageScr, name, price, discountPrice}){
+        return(
+          <>
+            <img 
+              src={imageScr} 
+              width="100" 
+              style={{ display : 'block' }} 
+            />
+            <p>{name}</p>
+            {(!discountPrice ? 
+              <p>Price: {price}</p> : 
+              <del>Price: {price}</del>
+            )}
+            {(discountPrice ? 
+              <p>Discount Price: {discountPrice}</p> : 
+              null
+            )}
+            <button>Add to Cart</button>
+          </>
+        )
+      }
+
+      function App(){
+        return(
+          <>
+            <ProductDetails 
+              imageScr="tennis-balls.png" 
+              name="Tennis ball" 
+              price="$6.00" 
+            />
+            <ProductDetails 
+              imageScr='plain-t-shirt.png' 
+              name="Plain T-shirt" 
+              price="$7.99" 
+            />
+            <ProductDetails 
+              imageScr="cotton-socks.png" 
+              name="Cotton Socks" 
+              price="$10.90" 
+              discountPrice="$5.45" 
+            />
+          </>
+        )
+      }
+        
+    
+    //   Get HTML Element, SetUp React, Use Render
+      const container = document.querySelector('.js-container');
+      const root = ReactDOM.createRoot(container);
+      root.render(<App />);
+
+    </script>
+  </body>
+</html>
