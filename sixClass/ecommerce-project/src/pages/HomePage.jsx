@@ -6,6 +6,7 @@ import "./HomePage.css"
 
 function HomePage() {
     const [products, setProduct] = useState([]);
+    const [cart, setCart] = useState([]);
 
     // Using fetch to get data from API
     /*
@@ -19,9 +20,16 @@ function HomePage() {
 
     // Using Axios to get data from API
     useEffect(()=>{
-        axios.get('http://localhost:3000/api/products')
-            .then((responces)=>{
-                setProduct(responces.data);
+        axios.get('/api/products')
+            .then((response)=>{
+                setProduct(response.data);
+            });
+    }, []);
+    
+    useEffect(()=>{
+        axios.get('/api/cart-items')
+            .then((response)=>{
+                setCart(response.data);
             });
     }, []);
     
@@ -31,7 +39,7 @@ function HomePage() {
             <link rel="icon" type="image/svg+xml" href="/home-favicon.png" />
             <title>Ecommerce Project</title>
 
-            <Header />
+            <Header cart={cart} />
 
             <div className="home-page">
                 <div className="products-grid">
