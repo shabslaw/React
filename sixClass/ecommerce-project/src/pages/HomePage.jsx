@@ -1,10 +1,11 @@
 import axios from "axios";
+import { useState, useEffect } from "react";
 import Header from "../components/Header";
-import { products } from "../../stating-code/data/products"
 import "./HomePage.css"
 
 
 function HomePage() {
+    const [products, setProduct] = useState([]);
 
     // Using fetch to get data from API
     /*
@@ -17,10 +18,13 @@ function HomePage() {
         */
 
     // Using Axios to get data from API
-    axios.get('http://localhost:3000/api/products')
-        .then((responces)=>{
-            console.log(responces.data);
-        });
+    useEffect(()=>{
+        axios.get('http://localhost:3000/api/products')
+            .then((responces)=>{
+                setProduct(responces.data);
+            });
+    }, []);
+    
 
     return (
         <>
