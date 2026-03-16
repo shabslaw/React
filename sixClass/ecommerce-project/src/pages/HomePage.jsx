@@ -1,14 +1,25 @@
+import axios from "axios";
 import Header from "../components/Header";
 import { products } from "../../stating-code/data/products"
 import "./HomePage.css"
 
 
 function HomePage() {
+
+    // Using fetch to get data from API
+    /*
     fetch('http://localhost:3000/api/products')
         .then((res)=>{
             return res.json()
         }).then((data)=>{
             console.log(data);
+        });
+        */
+
+    // Using Axios to get data from API
+    axios.get('http://localhost:3000/api/products')
+        .then((responces)=>{
+            console.log(responces.data);
         });
 
     return (
