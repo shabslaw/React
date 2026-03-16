@@ -4,9 +4,8 @@ import Header from "../components/Header";
 import "./HomePage.css"
 
 
-function HomePage() {
+function HomePage({cart}) {
     const [products, setProduct] = useState([]);
-    const [cart, setCart] = useState([]);
 
     // Using fetch to get data from API
     /*
@@ -26,12 +25,6 @@ function HomePage() {
             });
     }, []);
     
-    useEffect(()=>{
-        axios.get('/api/cart-items')
-            .then((response)=>{
-                setCart(response.data);
-            });
-    }, []);
     
 
     return (
