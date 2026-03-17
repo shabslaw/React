@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import "./HomePage.css"
 
 
-function HomePage({cart}) {
+function HomePage({ cart }) {
     const [products, setProduct] = useState([]);
 
     // Using fetch to get data from API
@@ -19,14 +19,25 @@ function HomePage({cart}) {
         */
 
     // Using Axios to get data from API
-    useEffect(()=>{
+    useEffect(() => {
+        // using promise to get the data
+        /*
         axios.get('/api/products')
-            .then((response)=>{
+            .then((response) => {
                 setProduct(response.data);
             });
+        */
+
+        // Using async & await to get data
+        const getHomeData = async () => {
+            const response = await axios.get('/api/products');
+            setProduct(response.data);
+        }
+
+        getHomeData();
     }, []);
-    
-    
+
+
 
     return (
         <>
