@@ -9,10 +9,12 @@ function OrdersPage({ cart }) {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        axios.get("/api/orders?expand=products")
-            .then((response) => {
-                setOrders(response.data);
-            })
+        const fetchOrdersData = async ()=>{
+            const response = await axios.get("/api/orders?expand=products")
+            setOrders(response.data);
+        }
+        
+        fetchOrdersData();
     }, [])
 
     return (
@@ -54,7 +56,7 @@ function OrdersPage({ cart }) {
 
                                 <div className="order-details-grid">
                                     {order.products.map((productItem) => {
-                                        return (<Fragment key={productItem.id}>
+                                        return (<Fragment key={productItem.productId}>
                                             <div className="product-image-container">
                                                 <img src={productItem.product.image} />
                                             </div>
