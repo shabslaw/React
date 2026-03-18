@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import "./HomePage.css"
 
 
-function HomePage({ cart }) {
+function HomePage({ cart, loadCartData}) {
     const [products, setProduct] = useState([]);
 
     // Using fetch to get data from API
@@ -47,7 +47,7 @@ function HomePage({ cart }) {
             <Header cart={cart} />
 
             <div className="home-page">
-                <ProductGrid products={products} />
+                <ProductGrid products={products} loadCartData={loadCartData} />
             </div>
         </>
     );
