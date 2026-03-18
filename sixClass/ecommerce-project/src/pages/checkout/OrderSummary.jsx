@@ -2,7 +2,7 @@ import dayjs from "dayjs"
 import { formartMoney } from "../../utils/money";
 import { DeliveryOption } from "./DeliveryOptions";
 
-export function OrderSummary({ cart, deliveryOptions }) {
+export function OrderSummary({ cart, deliveryOptions, loadCartData }) {
     return (<div className="order-summary">
         {deliveryOptions.length > 0 && cart.map((cartItem) => {
             const selectDeliveryOption = deliveryOptions
@@ -43,6 +43,7 @@ export function OrderSummary({ cart, deliveryOptions }) {
                         <DeliveryOption 
                             deliveryOptions={deliveryOptions} 
                             cartItem={cartItem} 
+                            loadCartData={loadCartData}
                         />
                     </div>
                 </div>
