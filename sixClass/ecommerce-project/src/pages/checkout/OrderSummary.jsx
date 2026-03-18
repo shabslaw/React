@@ -1,53 +1,63 @@
+import axios from "axios";
 import dayjs from "dayjs"
 import { formartMoney } from "../../utils/money";
 import { DeliveryOption } from "./DeliveryOptions";
 
 export function OrderSummary({ cart, deliveryOptions, loadCartData }) {
-    return (<div className="order-summary">
-        {deliveryOptions.length > 0 && cart.map((cartItem) => {
-            const selectDeliveryOption = deliveryOptions
-                .find((deliveryOption) => {
-                    return deliveryOption.id === cartItem.deliveryOptionId
-                });
+    return (
+        <div className="order-summary">
+            {deliveryOptions.length > 0 && cart.map((cartItem) => {
+                const selectDeliveryOption = deliveryOptions
+                    .find((deliveryOption) => {
+                        return deliveryOption.id === cartItem.deliveryOptionId
+                    });
 
-            return (
-                <div key={cartItem.id} className="cart-item-container">
-                    <div className="delivery-date">
-                        Delivery date: {dayjs(selectDeliveryOption.estimatedDeliveryTimeMs).format("dddd, MMMM D")}
-                    </div>
+                const deleteCartItem = async ()=>{
+                    await axios.delete(`/api/cart-items/${cartItem.productId}`);
+                    await loadCartData();
+                }
 
-                    <div className="cart-item-details-grid">
-                        <img className="product-image"
-                            src={cartItem.product.image} />
-
-                        <div className="cart-item-details">
-                            <div className="product-name">
-                                {cartItem.product.name}
-                            </div>
-                            <div className="product-price">
-                                {formartMoney(cartItem.product.priceCents)}
-                            </div>
-                            <div className="product-quantity">
-                                <span>
-                                    Quantity: <span className="quantity-label">{cartItem.quantity}</span>
-                                </span>
-                                <span className="update-quantity-link link-primary">
-                                    Update
-                                </span>
-                                <span className="delete-quantity-link link-primary">
-                                    Delete
-                                </span>
-                            </div>
+                return (
+                    <div key={cartItem.id} className="cart-item-container">
+                        <div className="delivery-date">
+                            Delivery date: {dayjs(selectDeliveryOption.estimatedDeliveryTimeMs).format("dddd, MMMM D")}
                         </div>
 
-                        <DeliveryOption 
-                            deliveryOptions={deliveryOptions} 
-                            cartItem={cartItem} 
-                            loadCartData={loadCartData}
-                        />
+                        <div className="cart-item-details-grid">
+                            <img className="product-image"
+                                src={cartItem.product.image} />
+
+                            <div className="cart-item-details">
+                                <div className="product-name">
+                                    {cartItem.product.name}
+                                </div>
+                                <div className="product-price">
+                                    {formartMoney(cartItem.product.priceCents)}
+                                </div>
+                                <div className="product-quantity">
+                                    <span>
+                                        Quantity: <span className="quantity-label">{cartItem.quantity}</span>
+                                    </span>
+                                    <span className="update-quantity-link link-primary">
+                                        Update
+                                    </span>
+                                    <span
+                                        className="delete-quantity-link link-primary"
+                                        onClick={deleteCartItem}
+                                    >
+                                        Delete
+                                    </span>
+                                </div>
+                            </div>
+
+                            <DeliveryOption
+                                deliveryOptions={deliveryOptions}
+                                cartItem={cartItem}
+                                loadCartData={loadCartData}
+                            />
+                        </div>
                     </div>
-                </div>
-            )
-        })}
-    </div>)
+                )
+            })}
+        </div>)
 }
