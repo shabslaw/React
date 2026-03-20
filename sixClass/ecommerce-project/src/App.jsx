@@ -21,6 +21,10 @@ function App() {
     loadCartData()
   }, []);
 
+  // window.axios = axios;
+  // console.log(axios.post("/api/reset"));
+  
+
   return (
     <>
       <Routes>
@@ -32,7 +36,7 @@ function App() {
           path="checkout" 
           element={<CheckoutPage cart={cart} loadCartData={loadCartData} />} 
         />
-        <Route path="orders" element={<OrdersPage cart={cart} />} />
+        <Route path="orders" element={<OrdersPage cart={cart} loadCartData={loadCartData} />} />
         <Route path="tracking/:orderId/:productId" element={<TrackingPage cart={cart} />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

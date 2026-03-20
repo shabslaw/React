@@ -1,7 +1,6 @@
-import axios from "axios";
 import dayjs from "dayjs"
-import { formartMoney } from "../../utils/money";
 import { DeliveryOption } from "./DeliveryOptions";
+import { CartItemDetails } from "./CartItemDetails";
 
 export function OrderSummary({ cart, deliveryOptions, loadCartData }) {
     return (
@@ -12,10 +11,7 @@ export function OrderSummary({ cart, deliveryOptions, loadCartData }) {
                         return deliveryOption.id === cartItem.deliveryOptionId
                     });
 
-                const deleteCartItem = async ()=>{
-                    await axios.delete(`/api/cart-items/${cartItem.productId}`);
-                    await loadCartData();
-                }
+                
 
                 return (
                     <div key={cartItem.id} className="cart-item-container">
@@ -27,28 +23,7 @@ export function OrderSummary({ cart, deliveryOptions, loadCartData }) {
                             <img className="product-image"
                                 src={cartItem.product.image} />
 
-                            <div className="cart-item-details">
-                                <div className="product-name">
-                                    {cartItem.product.name}
-                                </div>
-                                <div className="product-price">
-                                    {formartMoney(cartItem.product.priceCents)}
-                                </div>
-                                <div className="product-quantity">
-                                    <span>
-                                        Quantity: <span className="quantity-label">{cartItem.quantity}</span>
-                                    </span>
-                                    <span className="update-quantity-link link-primary">
-                                        Update
-                                    </span>
-                                    <span
-                                        className="delete-quantity-link link-primary"
-                                        onClick={deleteCartItem}
-                                    >
-                                        Delete
-                                    </span>
-                                </div>
-                            </div>
+                            <CartItemDetails cartItem={cartItem} loadCartData={loadCartData} />
 
                             <DeliveryOption
                                 deliveryOptions={deliveryOptions}
